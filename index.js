@@ -1,6 +1,8 @@
+//getting dependencies
 const inquirer = require("inquirer");
 const fs = require("fs");
 
+//Generating html with answers generated from promptUser function
 function generateHTML(answers) {
   const {
     name,
@@ -13,8 +15,7 @@ function generateHTML(answers) {
     email,
   } = answers;
 
-  console.log(license);
-
+  // switch statement to get license badge depending on user input
   let chosenLicense;
   switch (license) {
     case "Apache License 2.0":
@@ -66,7 +67,7 @@ function generateHTML(answers) {
       chosenLicense = "";
       break;
   }
-
+  //returned markdown file content:
   return `
  # ${name}
 
@@ -113,6 +114,7 @@ function generateHTML(answers) {
   `;
 }
 
+//using inquirer to collect user info from terminal
 const promptUser = () => {
   return inquirer.prompt([
     {
@@ -172,7 +174,7 @@ const promptUser = () => {
     },
   ]);
 };
-
+//using fs to write new file
 const init = () => {
   promptUser()
     .then((answers) =>
